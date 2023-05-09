@@ -8,37 +8,29 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  styleUrls: ['./courses.component.scss'],
 })
-export class CoursesComponent implements OnInit {
-
+export class CoursesComponent {
   courses$: Observable<Course[]>;
 
-  displayedColumns = ['name', 'category']
-
+  displayedColumns = ['name', 'category'];
 
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {
-    // this.courses = this. coursesService.list();
-
-    this.courses$ = this.coursesService.list()
-      .pipe(
-        catchError(error => {
-          this.onError('Erro ao carregar cursos.')
-          return of([])
-        })
-      );
+    this.courses$ = this.coursesService.list().pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar cursos.');
+        return of([]);
+      })
+    );
   }
 
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg
+      data: errorMsg,
     });
-  }
-
-  ngOnInit(): void {
   }
 
 }
