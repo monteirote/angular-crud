@@ -1,1 +1,28 @@
-<p>course-form works!</p>
+<mat-card>
+
+  <mat-toolbar color="primary">
+    <span>Adicione um Curso</span>
+    <span class="tituloToolBar"></span>
+  </mat-toolbar>
+
+  <mat-card-content class="min-width">
+    <form [formGroup]="form">
+
+      <mat-form-field class="full-widht1">
+        <input matInput placeholder="Nome do Curso" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field class="full-widht">
+        <input matInput placeholder="Categoria" formControlName="category">
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions class="botoes">
+    <button mat-button (click)="onCancel">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onSubmit">Concluir</button>
+  </mat-card-actions>
+
+</mat-card>
+
