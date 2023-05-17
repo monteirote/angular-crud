@@ -1,11 +1,14 @@
 mat-card {
   margin: 2em auto;
   width: 40%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .tituloToolBar {
   padding: 10px;
-  align-items: end;
+  align-items: center;
 }
 
 .full-widht1 {
@@ -22,6 +25,11 @@ mat-card {
   min-width: 150px;
 }
 
-.botoes {
-  color: black
+.spacer {
+  flex: 1 1 auto;
+}
+
+.pad {
+  margin-right: 9px;
+  margin-bottom: 9px;
 }
