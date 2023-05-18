@@ -1,7 +1,7 @@
 <mat-card>
 
   <mat-toolbar color="primary">
-    <span>Adicione um Curso</span>
+    <span>Detalhes do Curso</span>
     <span class="tituloToolBar"></span>
   </mat-toolbar>
 
@@ -13,16 +13,20 @@
       </mat-form-field>
 
       <mat-form-field class="full-widht">
-        <input matInput placeholder="Categoria" formControlName="category">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="null"> </mat-option>
+          <mat-option value="front-end">front-end</mat-option>
+          <mat-option value="back-end">back-end</mat-option>
+        </mat-select>
       </mat-form-field>
-
     </form>
   </mat-card-content>
 
   <mat-card-actions>
     <span class="spacer"></span>
-    <button mat-button (click)="onCancel">Cancelar</button>
-    <button mat-raised-button color="primary" (click)="onSubmit" class="pad">Concluir</button>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" class="pad">Concluir</button>
   </mat-card-actions>
 
 </mat-card>
