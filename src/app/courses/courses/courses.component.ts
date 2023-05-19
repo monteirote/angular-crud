@@ -14,8 +14,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesComponent {
   courses$: Observable<Course[]>;
 
-  displayedColumns = ['name', 'category','actions'];
-
   constructor(
     private coursesService: CoursesService,
     public dialog: MatDialog,
@@ -30,7 +28,6 @@ export class CoursesComponent {
     );
   }
 
-
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg,
@@ -42,6 +39,7 @@ export class CoursesComponent {
   onAdd() {
     this.router.navigate(['new'], {relativeTo: this.route});
   }
+
 
 
 }
