@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Course } from '../../models/course';
+import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 import { Observable, catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -41,8 +41,9 @@ export class CoursesComponent {
   }
 
   onEdit(course: Course) {
-    this.router.navigate(['edit', course._id], {relativeTo: this.route})
+    this.router.navigate(['edit', course._id], { relativeTo: this.route });
   }
+
 
 
 
