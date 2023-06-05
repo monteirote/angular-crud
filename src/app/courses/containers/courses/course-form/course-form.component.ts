@@ -69,13 +69,13 @@ export class CourseFormComponent implements OnInit {
     if (field?.hasError('minlength')) {
       const requiredLength = field.errors ?
                                 field.errors['minlength']['requiredLength'] : 3;
-      return `Nome curto demais (Min. de ${requiredLength} caracteres)`;
+      return `Nome curto demais.`;
     }
 
     if (field?.hasError('maxlength')) {
       const requiredLength = field.errors ?
                                 field.errors['maxlength']['requiredLength'] : 30;
-      return `Nome longo ${requiredLength} demais (Max. de ${requiredLength} caracteres).`;
+      return `Nome longo demais.`;
     }
 
     return 'Campo inválido';
