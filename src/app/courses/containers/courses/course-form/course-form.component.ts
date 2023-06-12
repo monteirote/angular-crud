@@ -16,7 +16,7 @@ export class CourseFormComponent implements OnInit {
     _id: [''],
     name: [
       '',
-      [Validators.required, Validators.minLength(3), Validators.maxLength(30)],
+      [Validators.required, Validators.minLength(5), Validators.maxLength(30)],
     ],
     category: ['', [Validators.required]],
   });
