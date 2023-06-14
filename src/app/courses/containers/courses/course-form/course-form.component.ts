@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, UntypedFormArray, Validators } from '@angular/forms';
 import { CoursesService } from '../../../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from 'src/app/courses/model/course';
+import { Lesson } from 'src/app/courses/model/lesson';
 
 @Component({
   selector: 'app-course-form',
@@ -12,22 +13,45 @@ import { Course } from 'src/app/courses/model/course';
   styleUrls: ['./course-form.component.scss'],
 })
 export class CourseFormComponent implements OnInit {
-  form = this.formBuilder.group({
-    _id: [''],
-    name: [
-      '',
-      [Validators.required, Validators.minLength(5), Validators.maxLength(30)],
-    ],
-    category: ['', [Validators.required]],
-  });
+
+  form!: FormGroup;
 
   ngOnInit(): void {
     const course: Course = this.route.snapshot.data['course'];
-    this.form.setValue({
-      name: course.name,
-      category: course.category,
-      _id: course._id,
+    this.form = this.formBuilder.group({
+        _id: [course._id],
+        name: [course.name, [Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(30)]],
+        category: [course.category, [Validators.required]],
+        lessons: this.formBuilder.array(this.getLessons(course))
+      });
+      console.log(this.form);
+      console.log(this.form.value )
+  }
+
+  panelOpenState = false;
+
+  private getLessons(course: Course) {
+    const lessons = [];
+    if(course?.lessons) {
+      course.lessons.forEach(lesson => lessons.push(this.createLesson(lesson)))
+    } else {
+      lessons.push(this.createLesson());
+    }
+    return lessons;
+  }
+
+  private createLesson(lesson: Lesson = { id: '', name: '', youtubeUrl: '' }) {
+    return this.formBuilder.group({
+      id: [lesson.id],
+      name: [lesson.name],
+      youtubeUrl: [lesson.youtubeUrl],
     });
+  }
+
+  getLessonsFormArray() {
+    return (<UntypedFormArray>this.form.get('lessons')).controls;
   }
 
   constructor(
@@ -59,7 +83,6 @@ export class CourseFormComponent implements OnInit {
   }
 
   getErrorMessage(fieldName: string) {
-
     const field = this.form.get(fieldName);
 
     if (field?.hasError('required')) {
@@ -67,14 +90,16 @@ export class CourseFormComponent implements OnInit {
     }
 
     if (field?.hasError('minlength')) {
-      const requiredLength = field.errors ?
-                                field.errors['minlength']['requiredLength'] : 3;
+      const requiredLength = field.errors
+        ? field.errors['minlength']['requiredLength']
+        : 3;
       return `Nome curto demais.`;
     }
 
     if (field?.hasError('maxlength')) {
-      const requiredLength = field.errors ?
-                                field.errors['maxlength']['requiredLength'] : 30;
+      const requiredLength = field.errors
+        ? field.errors['maxlength']['requiredLength']
+        : 30;
       return `Nome longo demais.`;
     }
 

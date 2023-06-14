@@ -1,4 +1,4 @@
-<mat-table [dataSource]="courses">
+<mat-table [dataSource]="courses" mat-elevation="8">
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Nome do Curso</mat-header-cell>
@@ -8,7 +8,7 @@
   <!-- Category Column -->
   <ng-container matColumnDef="category">
     <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
-    <mat-cell *matCellDef="let curso">
+    <mat-cell *matCellDef="let curso" class="arredondar">
       {{ curso.category }}
       <mat-icon
         aria-hidden="false"
@@ -25,8 +25,7 @@
         mat-mini-fab
         color="primary"
         aria-label="Adicionar um Curso"
-        (click)="onAdd()"
-      >
+        (click)="onAdd()">
         <mat-icon>add</mat-icon>
       </button>
     </mat-header-cell>

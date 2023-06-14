@@ -5,6 +5,7 @@ mat-card {
   border-radius: 10px;
   overflow: hidden;
   padding: 20px;
+  background-color: rgb(223, 231, 242);
 }
 
 .column-flex {
@@ -29,3 +30,11 @@ mat-card {
   align-items: center;
   justify-content: center;
 }
+
+.arredondarBottom {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow: hidden;
+}
+
+
